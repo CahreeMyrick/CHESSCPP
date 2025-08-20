@@ -118,14 +118,61 @@ public:
     }
 
     void display_board() const {
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-                if (board[i][j]) std::cout << board[i][j]->display() << " ";
-                else std::cout << "- ";
+        auto colLetters = []() {
+            std::cout << "    ";
+            for (int c = 0; c < COLS; ++c) std::cout << "  " << char('a' + c) << " ";
+            std::cout << "\n";
+        };
+
+        // Unicode box-drawing (looks great in most terminals)
+        const char* TL = "┌"; const char* TR = "┐";
+        const char* BL = "└"; const char* BR = "┘";
+        const char* T  = "┬"; const char* M  = "┼"; const char* B  = "┴";
+        const char* H  = "───"; const char* V = "│";
+
+        auto top_border = [&]() {
+            std::cout << "    " << TL;
+            for (int c = 0; c < COLS; ++c) {
+                std::cout << H << (c == COLS - 1 ? TR : T);
             }
-            std::cout << std::endl;
+            std::cout << "\n";
+        };
+        auto mid_border = [&]() {
+            std::cout << "    " << "├";
+            for (int c = 0; c < COLS; ++c) {
+                std::cout << H << (c == COLS - 1 ? "┤" : M);
+            }
+            std::cout << "\n";
+        };
+        auto bot_border = [&]() {
+            std::cout << "    " << BL;
+            for (int c = 0; c < COLS; ++c) {
+                std::cout << H << (c == COLS - 1 ? BR : B);
+            }
+            std::cout << "\n";
+        };
+
+        // Header letters (a–h)
+        colLetters();
+        top_border();
+
+        for (int r = 0; r < ROWS; ++r) {
+            // Left row index
+            std::cout << "  " << r << " " << V;
+            for (int c = 0; c < COLS; ++c) {
+                char pc = board[r][c] ? board[r][c]->display()[0] : '-';
+                std::cout << " " << pc << " " << V;
+            }
+            // Right row index
+            std::cout << " " << r << "\n";
+            if (r != ROWS - 1) mid_border();
         }
+
+        bot_border();
+        // Footer letters
+        colLetters();
     }
+
 
     bool in_bounds(int r, int c) const {
         return r >= 0 && r < ROWS && c >= 0 && c < COLS;
