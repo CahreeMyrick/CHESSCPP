@@ -81,27 +81,103 @@ class Board{
 
 };
 
-class DayofYear{
-  int output();
-  int month;
+
+
+class Move{
+public:
+  bool in_bounds(int r, int c) { return (0 <= r && r < 8 && 0 <= c && c < 8); }
+
+  std::vector<std::vector<int>> gen_pawn(const Board&B, int r, int c, std::string color)
+  {
+    std::vector<std::vector<int>> mv;
+    int dir = (color=="white") ? -1 : 1;
+    int start_rank = (color=="white") ? 6 : 1;
+    int one_r = r + dir;
+
+    // single push
+    if (in_bounds(one_r, c) && B.board[one_r][c].display=='-') {
+        mv.push_back({one_r,c});
+
+        // double push
+        int two_r = r + 2*dir;
+        if (r == start_rank && in_bounds(two_r,c) && B.board[two_r][c].display == '-') {
+            mv.push_back({two_r,c});
+        }
+    }
+    // captures
+    for (int dc : {-1, +1}) {
+        int rr = r + dir, cc = c + dc;
+        if (in_bounds(rr,cc) && B.board[rr][cc].color != color) {
+            mv.push_back({rr,cc});
+        }
+    }
+    // (En passant & promotion omitted to keep it minimal)
+    return mv;
+  }
+
+  std::vector<std::vector<int>> generate_moves_at(const Board& B, int r, int c){
+    const Piece& P = B.board[r][c];
+    if (P.piece_type == "empty" || P.display=='-') return {};
+    std::string color = P.color;
+
+    if (P.piece_type=="pawn")
+    {
+      return gen_pawn(B, r, c, color);
+    }
+
+  }
+
 };
 
 class Game{
 public:
+  std::string turn = "white";
 
-  void user_interaction(){
+  void start_game(){
     std::cout << "----- WELCOME TO CHESSMANIA -----" << std::endl;
     std::cout << "What game mode would you like to play?" << std::endl;
     std::cout << "1. Player vs. Player (PVP)" << std::endl;
     std::cout << "2. Player vs AI Bot (PVB)" << std::endl;
     std::cout << "3. Player vs Creator (PVC)" << std::endl;
-  }
 
-  void start_game(){
-    // create and set board
-    Board b;
-    b.set_board();
-    b.display_board();
+    std::string game_mode;
+    std::cin >> game_mode;
+
+    if (game_mode=="PVP")
+    {
+      // create and set board
+      Board b;
+      b.set_board();
+      b.display_board();
+
+      Move m;
+
+      std::cout << "It's " << turn << "'s turn. Make your move! " << std::endl;
+
+      std::string move;
+      std::vector<std::vector<int>> valid_moves;
+
+      std::cin >> move;
+      int r = move[0]-'0';
+      int c = move[1]-'0';
+      valid_moves = m.generate_moves_at(b, r, c);
+      
+      for (size_t i = 0; i < valid_moves.size(); i++)
+      {
+          if ((move[2]-'0' == valid_moves[i][0]) && (move[3]-'0' == valid_moves[i][1]))
+          {
+            std::cout << "HERE" << std::endl;
+            b.board[move[2]-'0'][move[3]-'0'] = std::move(b.board[r][c]);
+            b.board[r][c] = Piece();
+            b.display_board();
+          }
+
+      }
+
+      
+
+
+    }
 
   }
 
