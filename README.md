@@ -66,6 +66,9 @@ development approach:
   - then knight->test
   -  then other pieces ....
   -  casteling, enpassent, checks, etc come after basic fucntionality implementtation
+
+9/14/25
+- implemented the pawn movement logic yesterday, moving onto knight movement logic today
     
 
   
