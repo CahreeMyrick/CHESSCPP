@@ -115,6 +115,35 @@ public:
     return mv;
   }
 
+
+  std::vector<std::vector<int>> gen_knight(const Board& B, int r, int c, std::string color) {
+    static const int K[8][2] = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2},{-1,-2}};
+    std::vector<std::vector<int>> mv;
+    for (auto& o : K) {
+        int rr = r + o[0], cc = c + o[1];
+        if (!in_bounds(rr,cc)) continue;
+        const auto& p = B.board[rr][cc];
+        if (p.color != color) mv.push_back({rr,cc});
+    }
+    return mv;
+  }
+
+
+  std::vector<std::vector<int>> gen_king(const Board& B, int r, int c, std::string color) {
+      static const int K[8][2] = {{1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}};
+      std::vector<std::vector<int>> mv;
+      for (auto& o : K) {
+          int rr = r + o[0], cc = c + o[1];
+          if (!in_bounds(rr,cc)) continue;
+          const auto& p = B.board[rr][cc];
+          if (p.color != color) mv.push_back({rr,cc});
+      }
+      // (Castling omitted for brevity)
+      return mv;
+  }
+
+
+
   std::vector<std::vector<int>> generate_moves_at(const Board& B, int r, int c){
     const Piece& P = B.board[r][c];
     if (P.piece_type == "empty" || P.display=='-') return {};
@@ -124,6 +153,17 @@ public:
     {
       return gen_pawn(B, r, c, color);
     }
+
+    else if (P.piece_type=="knight")
+    {
+      return gen_knight(B, r, c, color);
+    }
+
+    else if (P.piece_type=="king")
+    {
+      return gen_king(B, r, c, color);
+    }
+
 
   }
 
@@ -166,7 +206,6 @@ public:
       {
           if ((move[2]-'0' == valid_moves[i][0]) && (move[3]-'0' == valid_moves[i][1]))
           {
-            std::cout << "HERE" << std::endl;
             b.board[move[2]-'0'][move[3]-'0'] = std::move(b.board[r][c]);
             b.board[r][c] = Piece();
             b.display_board();
