@@ -69,6 +69,20 @@ development approach:
 
 9/14/25
 - implemented the pawn movement logic yesterday, moving onto knight movement logic today
+
+9/15/25
+- I think the design in the minimax.cpp is better since it enables polymorphism and allows each piece to contain its own movement logic.
+- I also think its a more efficent design for when I dive into more AI implementaions
+- I also think using pointers/dynamic memeory may be a better approach for when I dont know objects at compile time.
+
+The minmiax.cpp file curently has
+- full game logic
+- AI implementation (minimax with alpha beta bruning)
+
+How do I want this to scale?
+- not currently sure
+- I want it to grow into a larger software product
+- need to learn more about software engineering principles/scaling software, deploying projects
     
 
   
