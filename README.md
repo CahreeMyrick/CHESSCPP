@@ -83,7 +83,32 @@ How do I want this to scale?
 - not currently sure
 - I want it to grow into a larger software product
 - need to learn more about software engineering principles/scaling software, deploying projects
-    
+
+
+
+
+9/17/25
+
+Class Piece{
+public:
+
+// member vars (common to all pieces)
+Color color = Color::None // piece color
+bool hasMoved = false; // for castling and double pawn steps
+
+// constructor
+Piece(Color col=Color::None) : color(col) {} // inializes the color to defualt "None"
+
+// virtual destructor
+virtual ~Piece() = default; 
+• virtual destructor: necessary whenevery you destory/delete derived objects via base pointer/reference, without it youd get undefined behavior
+
+// polymorphic display
+virtual std::string display() {return "?"}
+• lets each derived class (king, queen, pawn etc ) override how it shows itself.
+
+virtual bool can_move(const Board&b, int r0, int c0, int r1, int c1) = 0;
+• pure virtual, so Piece is abstract and derived classses must implement their move logic. Niccessary if you want compile time enforcement that every real piece defines its movement
 
   
     
