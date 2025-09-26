@@ -221,7 +221,7 @@ public:
         return !is_empty(r, c) && board[r][c]->color != col;
     }
 
-    // For sliders (rook/bishop/queen): check that squares BETWEEN are empty.
+    // For sliders (rook/bishop/queen): check that squares between are empty.
     bool path_clear(int r0, int c0, int r1, int c1) const {
         int dr = (r1 > r0) - (r1 < r0);  // -1,0,1
         int dc = (c1 > c0) - (c1 < c0);  // -1,0,1
@@ -916,7 +916,7 @@ int main() {
             black = &aiBlack;
             break;
     }
-
+    
     game.loop_with_strategies(white, black);
     return 0;
 }
