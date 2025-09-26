@@ -8,7 +8,7 @@ the "bot" is implemented via minimax algorithm.
 
 The more familiar expectations in regards to "chess engines" are computer programs that
 can analyze chess positions and generate a list of the strongest moves. Though the 
-minimax algorithm kind of does this at a much smaller scale, this isnt currently our primary goal.
+minimax algorithm kind of does this at a much smaller scale, this isnt currently my primary goal.
 
 
 
