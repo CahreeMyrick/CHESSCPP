@@ -98,6 +98,12 @@ void test_kingside_castling_white() {
     // Black play a quiet move to pass turn (a7a6: "60 50")
     assert(do_ok(g, "60 50"));
 
+    // white move pawn
+    assert(do_ok(g, "14 24"));
+
+    // black move pawn
+    assert(do_ok(g, "67 57"));
+
     // Bishop: "05 32" (0,5)->(3,2)
     assert(do_ok(g, "05 32"));
     // Black pass: "61 51" (b7b6)
