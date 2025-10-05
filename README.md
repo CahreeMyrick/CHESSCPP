@@ -23,21 +23,21 @@ Both `uci_main.cpp` and `test_chess.cpp` `#define CHESS_NO_MAIN` before includin
 
 ```bash
 # CLI engine
-clang++ -std=c++17 -O2 -Wall -Wextra -pedantic -o minimax minimax.cpp
+clang++ -std=c++20 -O2 -Wall -Wextra -pedantic -o minimax minimax.cpp
 
 
 # Tests
-clang++ -std=c++17 -O2 -Wall -Wextra -pedantic -o tests test_chess.cpp
+clang++ -std=c++20 -O2 -Wall -Wextra -pedantic -o tests test_chess.cpp
 
 # UCI engine
-clang++ -std=c++17 -O2 -Wall -Wextra -pedantic -o myengine uci_main.cpp
+clang++ -std=c++20 -O2 -Wall -Wextra -pedantic -o myengine uci_main.cpp
 # (Use g++ instead of clang++ if you prefer)
 ```
 
 ### Windows (MinGW)
 ```bat
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic -o tests.exe test_chess.cpp
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic -o myengine.exe uci_main.cpp
+g++ -std=c++20 -O2 -Wall -Wextra -pedantic -o tests.exe test_chess.cpp
+g++ -std=c++20 -O2 -Wall -Wextra -pedantic -o myengine.exe uci_main.cpp
 ```
 
 
