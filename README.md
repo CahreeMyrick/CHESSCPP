@@ -99,7 +99,3 @@ Conversion helpers (in `uci_main.cpp`):
 - `legal_moves()` is non-empty at start
 
 ---
-
-## License
-
-Add a license (MIT/Apache-2.0/BSD-3-Clause, etc.).
