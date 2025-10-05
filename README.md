@@ -87,15 +87,3 @@ Conversion helpers (in `uci_main.cpp`):
 - `engine_move_to_uci("14 34") -> "e2e4"`
 
 ---
-
-## Features Covered by Tests
-
-- Initial placement (pawns, kings, queens)
-- Turn alternation
-- Illegal move rejection (e.g., knight moving like a bishop)
-- **En passant**
-- **Kingside castling** (white)
-- Deep-copy independence (`Game h = g;`)
-- `legal_moves()` is non-empty at start
-
----
