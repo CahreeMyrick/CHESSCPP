@@ -1,6 +1,6 @@
 # Chess Engine Baseline (2025-10-10)
 
-## Environment
+## Environment ##
 Commit: e69960a
 Compiler: g++ 13 (libc++), flags: -O3 -DNDEBUG -march=native -flto
 Machine: CPU Model: Apple M3, CPU Cores/Threads: 8 cores/ 8 threads , RAM: 16 GB, macOS Version 15.3.1
